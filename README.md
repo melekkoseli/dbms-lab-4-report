@@ -82,8 +82,14 @@ Sonuç olarak, veritabanı sistemlerinin yüksek performanslı çalışabilmesi;
 
 ## VT Üzerinde Gösterilen Kaynak Kodları
 
-Açıklama [Linki](https://...) \
-Açıklama [Linki](https://...) \
-Açıklama [Linki](https://...) \
-... \
-...
+- Buffer Pool yönetimi:
+  https://github.com/postgres/postgres/blob/master/src/backend/storage/buffer/bufmgr.c
+
+- Page ve blok bazlı erişim yapıları:
+  https://github.com/postgres/postgres/tree/master/src/backend/storage/page
+
+- B+ Tree indeks yapısı:
+  https://github.com/postgres/postgres/tree/master/src/backend/access/nbtree
+
+- Write Ahead Log (WAL) mekanizması:
+  https://github.com/postgres/postgres/blob/master/src/backend/access/transam/xlog.c

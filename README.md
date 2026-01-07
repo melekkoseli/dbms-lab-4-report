@@ -12,25 +12,25 @@ Aşağıda kutucuk (checkbox) ile gösterilen maddelerden en az birini seçtiği
 
 ### Disk Erişimi
 
-- [ ]  **Blok bazlı disk erişimi** → block_id + offset
+- [X]  **Blok bazlı disk erişimi** → block_id + offset
 - [ ]  Rastgele erişim
 
 ### VT için Page (Sayfa) Anlamı
 
-- [ ]  VT hangisini kullanır? **Satır/ Sayfa** okuması
+- [X]  VT hangisini kullanır? **Satır/ Sayfa** okuması
 
 ---
 
 ### Buffer Pool
 
-- [ ]  Veritabanları, Sık kullanılan sayfaları bellekte (RAM) kopyalar mı (caching) ?
+- [X]  Veritabanları, Sık kullanılan sayfaları bellekte (RAM) kopyalar mı (caching) ?
 
-- [ ]  LRU / CLOCK gibi algoritmaları
-- [ ]  Diske yapılan I/O nasıl minimize ederler?
+- [X]  LRU / CLOCK gibi algoritmaları
+- [X]  Diske yapılan I/O nasıl minimize ederler?
 
 # 2. Veri Yapıları Perspektifi
 
-- [ ]  B+ Tree Veri Yapıları VT' lerde nasıl kullanılır?
+- [X]  B+ Tree Veri Yapıları VT' lerde nasıl kullanılır?
 - [ ]  VT' lerde hangi veri yapıları hangi amaçlarla kullanılır?
 - [ ]  Clustered vs Non-Clustered Index Kavramı
 - [ ]  InnoDB satırı diskte nasıl durur?
@@ -39,7 +39,7 @@ Aşağıda kutucuk (checkbox) ile gösterilen maddelerden en az birini seçtiği
 
 DB diske yazarken:
 
-- [ ]  WAL (Write Ahead Log) İlkesi
+- [X]  WAL (Write Ahead Log) İlkesi
 - [ ]  Log disk (fsync vs write) sistem çağrıları farkı
 
 ---
@@ -63,17 +63,22 @@ Ekran kaydı. 2-3 dk. açık kaynak V.T. kodu üzerinde konunun gösterimi. Vide
 
 # Açıklama (Ort. 600 kelime)
 
-Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse lacinia luctus urna, vel aliquet lacus facilisis ac. Donec quis placerat orci, efficitur consectetur lacus. Sed rhoncus erat ex, at sagittis velit mollis et. Aliquam enim orci, sollicitudin sit amet libero quis, mollis ultricies risus. Fusce tempor, felis a consequat tristique, dolor magna convallis nulla, vel ullamcorper magna mauris non ipsum. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Nam quis imperdiet ex, at blandit sapien. Aliquam lacinia erat ac ipsum fringilla, quis vestibulum augue posuere. Nulla in enim nulla. Nunc euismod odio mauris, sed sollicitudin ex condimentum non. In efficitur egestas enim. Fusce tempus erat quis placerat convallis.
+Bu çalışmada, veritabanı sistemlerinin performansını etkileyen temel unsurlar sistem programlama ve veri yapıları bakış açısıyla ele alınmıştır. Özellikle disk erişimi, page kavramı, buffer pool mekanizması, indeks yapıları ve WAL prensibi incelenmiştir. Föy-4 kapsamında gerçekleştirilen SQL sorguları ve indeksleme işlemleri, bu kavramların pratikte nasıl performans avantajı sağladığını gözlemlemek açısından bir temel oluşturmuştur.
 
-Nam sit amet tincidunt ante. Pellentesque sit amet quam interdum, pellentesque dui vel, iaculis elit. Donec sed dui sodales nulla dignissim tincidunt. Maecenas semper metus id fermentum vulputate. Pellentesque lobortis hendrerit venenatis. Nullam imperdiet, ex eget ultricies egestas, mauris nunc aliquam ante, sed consectetur tellus ex vel leo. Nunc ut erat dapibus, auctor dolor eu, pretium sem. In lacinia congue eros et finibus. Aenean auctor, leo a feugiat placerat, urna felis lacinia purus, laoreet volutpat mi nisl eget dui. Ut vitae condimentum leo.
+Disk erişimi, veritabanı sistemlerinde en maliyetli işlemlerden biridir. Geleneksel sabit diskler ve hatta SSD’ler, RAM’e kıyasla oldukça yüksek gecikme sürelerine sahiptir. Bu nedenle modern veritabanı sistemleri diske doğrudan satır bazlı erişim yapmak yerine page bazlı erişim kullanır. Disk üzerindeki veriler, belirli boyutlardaki sayfalar halinde organize edilir ve erişimler block_id ve offset mantığıyla gerçekleştirilir. Bu yaklaşım, diskten yapılan I/O işlemlerinin sayısını azaltarak performansı artırır.
 
-Maecenas ex diam, vehicula et nulla vel, mattis viverra metus. Nam at ex scelerisque, semper augue lobortis, semper est. Etiam id pretium odio, eget rutrum neque. Pellentesque blandit magna vel aliquam gravida. Nullam massa nisl, imperdiet at dapibus non, cursus vehicula turpis. Vestibulum rutrum hendrerit augue. Aliquam id nisi id arcu tempor venenatis vel nec erat. Morbi sed posuere erat. Morbi et sollicitudin urna. Suspendisse ullamcorper vitae purus sit amet sodales. Nam ut tincidunt ipsum, ut varius erat. Duis congue magna nec euismod condimentum. In hac habitasse platea dictumst. Nunc mattis odio sed enim laoreet imperdiet. In hac habitasse platea dictumst. Nullam tincidunt quis.
+Veritabanları, satır bazlı okuma yapmak yerine sayfa bazlı okuma yapar. Bunun temel nedeni, diskten tek bir satır okumak yerine bir sayfa içerisindeki birden fazla satırı tek seferde belleğe almanın daha verimli olmasıdır. Bu sayede aynı sayfa üzerindeki verilere yapılan sonraki erişimler disk yerine bellekten karşılanır. PostgreSQL gibi veritabanlarında bu yapı açıkça görülmekte ve tüm erişim mantığı sayfa temelli olarak kurgulanmaktadır.
 
-Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse lacinia luctus urna, vel aliquet lacus facilisis ac. Donec quis placerat orci, efficitur consectetur lacus. Sed rhoncus erat ex, at sagittis velit mollis et. Aliquam enim orci, sollicitudin sit amet libero quis, mollis ultricies risus. Fusce tempor, felis a consequat tristique, dolor magna convallis nulla, vel ullamcorper magna mauris non ipsum. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Nam quis imperdiet ex, at blandit sapien. Aliquam lacinia erat ac ipsum fringilla, quis vestibulum augue posuere. Nulla in enim nulla. Nunc euismod odio mauris, sed sollicitudin ex condimentum non. In efficitur egestas enim. Fusce tempus erat quis placerat convallis.
+Buffer Pool, veritabanlarının performansını doğrudan etkileyen en önemli bileşenlerden biridir. Buffer pool, diskten okunan sayfaların RAM içerisinde tutulduğu alandır. Sık kullanılan sayfalar bellekte saklanarak, aynı veriye tekrar erişildiğinde disk I/O yapılmasının önüne geçilir. Bu durum, Föy-4’te yapılan sorgularda indeksli sorguların çok daha hızlı çalışmasının temel nedenlerinden biridir.
 
-Nam sit amet tincidunt ante. Pellentesque sit amet quam interdum, pellentesque dui vel, iaculis elit. Donec sed dui sodales nulla dignissim tincidunt. Maecenas semper metus id fermentum vulputate. Pellentesque lobortis hendrerit venenatis. Nullam imperdiet, ex eget ultricies egestas, mauris nunc aliquam ante, sed consectetur tellus ex vel leo. Nunc ut erat dapibus, auctor dolor eu, pretium sem. In lacinia congue eros et finibus. Aenean auctor, leo a feugiat placerat, urna felis lacinia purus, laoreet volutpat mi nisl eget dui. Ut vitae condimentum leo.
+Buffer pool içerisinde hangi sayfaların bellekte tutulacağı ve hangilerinin bellekten çıkarılacağı belirli algoritmalarla yönetilir. En yaygın kullanılan yaklaşımlar LRU (Least Recently Used) ve CLOCK benzeri algoritmalardır. Bu algoritmalar, yakın zamanda kullanılan sayfaların gelecekte tekrar kullanılma ihtimalinin daha yüksek olduğu varsayımına dayanır. Böylece buffer pool kapasitesi en verimli şekilde kullanılarak disk erişimi minimize edilir.
 
-Maecenas ex diam, vehicula et nulla vel, mattis viverra metus. Nam at ex scelerisque, semper augue lobortis, semper est. Etiam id pretium odio, eget rutrum neque. Pellentesque blandit magna vel aliquam gravida. Nullam massa nisl, imperdiet at dapibus non, cursus vehicula turpis. Vestibulum rutrum hendrerit augue. Aliquam id nisi id arcu tempor venenatis vel nec erat. Morbi sed posuere erat. Morbi et sollicitudin urna. Suspendisse ullamcorper vitae purus sit amet sodales. Nam ut tincidunt ipsum, ut varius erat. Duis congue magna nec euismod condimentum. In hac habitasse platea dictumst. Nunc mattis odio sed enim laoreet imperdiet. In hac habitasse platea dictumst. Nullam tincidunt quis.
+Veri yapıları perspektifinden bakıldığında, B+ Tree yapısı veritabanı indekslerinin temelini oluşturur. B+ Tree, disk tabanlı sistemler için optimize edilmiş bir ağaç yapısıdır ve dengeli olması sayesinde arama, ekleme ve silme işlemlerini logaritmik zamanda gerçekleştirebilir. Ayrıca yaprak düğümlerin ardışık olarak disk üzerinde tutulması, aralık sorgularında yüksek performans sağlar. Föy-4’te kullanılan indekslerin arka planında bu yapı yer almaktadır.
+
+Veritabanı sistemlerinde veri güvenliği ve tutarlılığı da performans kadar önemlidir. Bu noktada Write Ahead Log (WAL) prensibi devreye girer. WAL yaklaşımında, veriye ait değişiklikler önce log dosyasına yazılır, ardından asıl veri sayfaları güncellenir. Bu sayede sistem çökmesi gibi durumlarda log dosyaları kullanılarak veritabanı tutarlı bir duruma geri döndürülebilir. WAL aynı zamanda sıralı disk yazımı yaptığı için rastgele disk yazımlarına kıyasla performans avantajı da sağlar.
+
+Sonuç olarak, veritabanı sistemlerinin yüksek performanslı çalışabilmesi; disk erişimini minimize eden sayfa bazlı yapı, buffer pool ile etkin bellek kullanımı, B+ Tree gibi disk dostu veri yapıları ve WAL gibi güvenli yazma mekanizmalarının birlikte çalışmasıyla mümkün olmaktadır. Bu çalışma kapsamında ele alınan kavramlar, veritabanı sistemlerinin yalnızca kullanıcı seviyesinde değil, sistem ve veri yapıları düzeyinde de anlaşılmasının önemini ortaya koymaktadır.
+
 
 ## VT Üzerinde Gösterilen Kaynak Kodları
 
